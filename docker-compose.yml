@@ -1,0 +1,26 @@
+version: '3'
+services:
+
+  #  api:
+  #    build: api/
+  #    container_name: api
+  #    entrypoint: dockerize -wait tcp://db:5432 -timeout 60s -wait-retry-interval 5s ./scripts/entrypoint.sh
+  #    tty: true
+  #    volumes:
+  #      - './api:/var/www'
+  #    ports:
+  #      - 3000:3000
+  #    depends_on:
+  #      - db
+
+  db:
+    hostname: db
+    ports:
+      - 5432:5432
+    build: .docker/postgres/
+    container_name: db
+    environment:
+      - POSTGRES_USER=pguser
+      - POSTGRES_PASSWORD=pguser
+      - POSTGRES_DB=postgres
+    restart: always
